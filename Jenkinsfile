@@ -13,7 +13,7 @@ node {
 		* docker build on the command line */
         commit_id = sh(returnStdout: true, script: 'git rev-parse HEAD')
   		echo "$commit_id"
-        dockerImage = docker.build(registry + ":$commit_id")
+        dockerImage = docker.build registry + ":$commit_id"
 
 	}
 	stage('Tag and Register image') {
