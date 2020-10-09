@@ -1,9 +1,10 @@
 node {
-
-    def dockerImage
-    def registryCredential = 'DockerHub'
-    def commit_id
-
+    environment { 
+        registry = "achirashah/webapp-node" 
+        registryCredential = 'achirashah' 
+        dockerImage = '' 
+    }
+    agent any
 	stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
         checkout scm
@@ -13,7 +14,7 @@ node {
 		* docker build on the command line */
         commit_id = sh(returnStdout: true, script: 'git rev-parse HEAD')
   		echo "$commit_id"
-        dockerImage = docker.build ("webapp-node", "-f Dockerfile .")
+        dockerImage = docker.build registry + ":$commit_id"
 
 	}
 	stage('Tag and Register image') {
@@ -22,7 +23,7 @@ node {
     	* Second, the app name with git commit.
     	* Third, latest tag.*/
         docker.withRegistry( '', registryCredential ) {
-            dockerImage.push("$commit_id")
+            //dockerImage.push("$commit_id")
             dockerImage.push("cloud-webapp_$commit_id")
             dockerImage.push("latest")
 		}
