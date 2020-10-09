@@ -1,9 +1,9 @@
 node {
-    environment { 
-        registry = "achirashah/webapp-node" 
-        registryCredential = 'achirashah' 
-        dockerImage = '' 
-    }
+	
+    def registry = "achirashah/webapp-node" 
+    def registryCredential = 'achirashah' 
+    def dockerImage = '' 
+
     agent any
 	stage('Clone repository') {
         /* Cloning the Repository to our Workspace */
