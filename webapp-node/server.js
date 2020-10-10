@@ -6,9 +6,9 @@ app.listen(3000, () => {
   console.log(`App running on port 3000...`);
 });
 //console.log(process.env.DB_NAME);
-db.query('CREATE DATABASE IF NOT EXISTS '+DB_NAME, function (err) {// create db if not exist
+db.query('CREATE DATABASE IF NOT EXISTS '+ DB_NAME, function (err) {// create db if not exist
   if (err) throw err;
-  db.query('USE '+DB_NAME, function (err) {
+  db.query('USE '+ DB_NAME, function (err) {
     if (err) throw err;
     db.query('create table IF NOT EXISTS user('
       + 'id varchar(255) NOT NULL,'
